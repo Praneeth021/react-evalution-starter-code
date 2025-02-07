@@ -137,11 +137,10 @@ const View = (() => {
     cart.forEach(item => {
       const li = document.createElement('li');
       li.innerHTML = `
-        ${item.content} x ${item.amount}
+        ${item.content} X ${item.amount}
         <button class="edit">Edit</button>
         <button class="delete">Delete</button>
-      `;
-      
+      `;  
       li.querySelector('.edit').addEventListener('click', () => handleEdit(item));
       li.querySelector('.delete').addEventListener('click', () => handleDelete(item.id));
       
@@ -150,7 +149,8 @@ const View = (() => {
   };
 
   const renderEditForm = (item, handleEditAmount) => {
-    const editForm = document.querySelector('#edit-form');
+    // alert("In Changing Edit")
+    const editForm = document.querySelector('.edit-form');
     editForm.innerHTML = `
       <h3>Edit ${item.content}</h3>
       <input type="number" value="${item.amount}" min="1" id="edit-amount">
@@ -191,11 +191,13 @@ const Controller = ((model, view) => {
       });
   };
 
-  const handleEdit = () => {
+  const handleEdit = (item) => {
+    // alert(JSON.stringify(item));
+    // alert("Hello")
     view.renderEditForm(item, handleEditAmount);
   };
 
-  const handleEditAmount = () => {
+  const handleEditAmount = (id,newAmount) => {
     model.updateCart(id, newAmount)
       .then(() => model.getCart())
       .then(cart => {
@@ -204,6 +206,8 @@ const Controller = ((model, view) => {
   };
 
   const handleDelete = (id) => {
+    // alert("IN Delete");
+    console.log("In Handling Delete")
     model.deleteFromCart(id)
       .then(() => model.getCart())
       .then(cart => {
@@ -211,7 +215,7 @@ const Controller = ((model, view) => {
       });
   };
 
-  const handleCheckout = (id) => {
+  const handleCheckout = () => {
     model.checkout()
       .then(() => model.getCart())
       .then(cart => {
