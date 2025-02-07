@@ -70,21 +70,6 @@ button:disabled {
     cursor: not-allowed;
 }
 
-.btn-blue {
-    background-color: #007bff;
-    color: white;
-}
-
-.btn-red {
-    background-color: #dc3545;
-    color: white;
-}
-
-.btn-green {
-    background-color: #28a745;
-    color: white;
-}
-
 .checkout-btn {
     width: 100%;
     padding: 10px;
